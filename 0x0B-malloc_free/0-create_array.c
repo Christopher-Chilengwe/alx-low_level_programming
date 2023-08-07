@@ -1,28 +1,45 @@
 #include "main.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
- * create_array - Create an array of size and initialize with char c.
- * @size: Size of the array.
- * @c: Char to assign to each element.
+ * str_concat - Concatenates two strings.
+ * @s1: First string.
+ * @s2: Second string.
  *
- * Description: This function creates an array of the given size and initializes
- *              each element with the specified character.
- *
- * Return: Pointer to the array, NULL if allocation fails.
+ * Return: Pointer to newly allocated space containing concatenated strings,
+ *         NULL if allocation fails.
  */
-char *create_array(unsigned int size, char c)
+char *str_concat(char *s1, char *s2)
 {
-    char *str;
-    unsigned int i;
+    char *concat;
+    unsigned int len1, len2, i, j;
 
-    str = malloc(sizeof(char) * size);
+    if (s1 == NULL)
+        s1 = "";
+    if (s2 == NULL)
+        s2 = "";
 
-    if (size == 0 || str == NULL)
+    len1 = 0;
+    while (s1[len1] != '\0')
+        len1++;
+
+    len2 = 0;
+    while (s2[len2] != '\0')
+        len2++;
+
+    concat = malloc(sizeof(char) * (len1 + len2 + 1));
+
+    if (concat == NULL)
         return (NULL);
 
-    for (i = 0; i < size; i++)
-        str[i] = c;
+    for (i = 0; i < len1; i++)
+        concat[i] = s1[i];
 
-    return (str);
+    for (j = 0; j < len2; j++)
+        concat[i + j] = s2[j];
+
+    concat[i + j] = '\0';
+
+    return (concat);
 }
