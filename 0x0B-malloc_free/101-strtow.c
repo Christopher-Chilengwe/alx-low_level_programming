@@ -25,33 +25,33 @@ int count_word(char *s)
         }
     }
 
-    return w;
+    return (w);
 }
 
 /**
- * allocate_matrix - Allocate memory for the matrix of strings.
- * @words: Number of words.
- *
- * Return: Pointer to the allocated matrix, or NULL on failure.
- */
-char **allocate_matrix(int words)
-{
-    return (char **)malloc(sizeof(char *) * (words + 1));
-}
-
-/**
- * fill_matrix - Fill the matrix with split words.
- * @matrix: Matrix to fill.
+ * strtow - Splits a string into words.
  * @str: String to split.
  *
- * Return: Nothing.
+ * Return: Pointer to an array of strings (Success),
+ *         or NULL (Error).
  */
-void fill_matrix(char **matrix, char *str)
+char **strtow(char *str)
 {
-    int i, k = 0, len = 0, c = 0, start, end;
+    char **matrix, *tmp;
+    int i, k = 0, len = 0, words, c = 0, start, end;
 
     while (*(str + len))
         len++;
+
+    words = count_word(str);
+
+    if (words == 0)
+        return (NULL);
+
+    matrix = (char **)malloc(sizeof(char *) * (words + 1));
+
+    if (matrix == NULL)
+        return (NULL);
 
     for (i = 0; i <= len; i++)
     {
@@ -60,10 +60,10 @@ void fill_matrix(char **matrix, char *str)
             if (c)
             {
                 end = i;
-                char *tmp = (char *)malloc(sizeof(char) * (c + 1));
+                tmp = (char *)malloc(sizeof(char) * (c + 1));
 
                 if (tmp == NULL)
-                    return;
+                    return (NULL);
 
                 while (start < end)
                     *tmp++ = str[start++];
@@ -79,34 +79,6 @@ void fill_matrix(char **matrix, char *str)
     }
 
     matrix[k] = NULL;
-}
 
-/**
- * strtow - Splits a string into words.
- * @str: String to split.
- *
- * Return: Pointer to an array of strings (Success),
- *         or NULL (Error).
- */
-char **strtow(char *str)
-{
-    int words;
-    char **matrix;
-
-    if (str == NULL)
-        return NULL;
-
-    words = count_word(str);
-
-    if (words == 0)
-        return NULL;
-
-    matrix = allocate_matrix(words);
-
-    if (matrix == NULL)
-        return NULL;
-
-    fill_matrix(matrix, str);
-
-    return matrix;
+    return (matrix);
 }
