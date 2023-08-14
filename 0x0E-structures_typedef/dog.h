@@ -1,29 +1,57 @@
-#ifndef _DOG_HEADER_
-#define _DOG_HEADER_
+#ifndef DOG_H
+
+#define DOG_H
+
 
 /**
- * struct dog - Attributes of a canine friend
- * @name: The name of the four-legged companion.
- * @age: The age of the furry buddy.
- * @owner: The loving caretaker of the adorable creature.
+
+ * struct dog - a dog's basic info
+
+ * @name: First member
+
+ * @age: Second member
+
+ * @owner: Third member
+
  *
- * Description: This structure holds the key attributes of a dog.
+
+ * Description: Longer description
+
  */
+
 struct dog
+
 {
-    char *name;
-    float age;
-    char *owner;
+
+        char *name;
+
+        float age;
+
+        char *owner;
+
 };
 
+
 /**
- * dog_t - Typedef for the dog structure
+
+ * dog_t - typedef for struct dog
+
  */
+
 typedef struct dog dog_t;
 
-void initialize_dog(struct dog *d, char *name, float age, char *owner);
-void display_dog(struct dog *d);
-dog_t *create_dog(char *name, float age, char *owner);
-void release_dog(dog_t *d);
+
+void init_dog(struct dog *d, char *name, float age, char *owner);
+
+void print_dog(struct dog *d);
+
+dog_t *new_dog(char *name, float age, char *owner);
+
+void free_dog(dog_t *d);
+
+char *_strcpy(char *dest, char *src);
+
+int _strlen(char *s);
+
 
 #endif
